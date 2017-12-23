@@ -1,0 +1,23 @@
+sudo: enabled
+dist: xenial
+language: cpp
+os: linux
+
+matrix:
+  include:
+    - compiler: gcc
+      env: COMPILER=g++-5
+
+
+before_install:
+  - sudo apt update -qq
+
+install: sudo ./gaia/install-dependencies.sh
+
+script:
+  - ./blaze.sh -ninja && cd build-dbg
+  - ninja -j4 one
+
+after_failure:
+  - pwd
+  - find ../third_party/src/ -regex ".*\(err\|out\).log" | xargs -n 3 -t cat
