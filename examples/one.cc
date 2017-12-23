@@ -2,6 +2,7 @@
 #include "base/logging.h"
 #include <boost/fiber/all.hpp>
 #include <thread>
+#include <absl/strings/string_view.h>
 
 using namespace boost;
 
@@ -61,7 +62,7 @@ int main(int argc, char **argv) {
   }
   ch.close();
   
-  cout << "Before join\n";
+  cout << absl::string_view("Before join\n");
   for (auto& t : io_threads)
     t.join();
   CHECK_EQ(0, num_requests.load());
