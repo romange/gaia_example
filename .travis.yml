@@ -23,7 +23,7 @@ before_install:
 install: sudo ./gaia/install-dependencies.sh
 
 script:
-  - ./blaze.sh -ninja && cd build-dbg
+  - ./gaia/blaze.sh -ninja && cd build-dbg
   - ninja -j4 one
 
 after_failure:
